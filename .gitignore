@@ -1,0 +1,6 @@
+# Lock files
+yarn.lock
+package-lock.json
+# Build files 
+node_modules/
+dist

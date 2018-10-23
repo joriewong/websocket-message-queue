@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>websocket-message-queue</title>
+	<script src="./node_modules/echarts/dist/echarts.min.js"></script>
+	<script src="./node_modules/websocket-heartbeat-js/dist/index.js"></script>
+</head>
+<body>
+	<div id="wsChartContainer" style="width: 600px; height: 400px;"></div>
+	<script type="text/javascript">
+
+        const wsChart = echarts.init(document.getElementById('wsChartContainer'));
+
+        const list = [];
+
+		const websocketHeartbeatJs = new window.WebsocketHeartbeatJs({
+    		url: 'ws://localhost:6666/'
+		});
+
+		websocketHeartbeatJs.onopen = () => {
+			console.log('websocketHeartbeatJs open');
+		}
+
+		websocketHeartbeatJs.onmessage = (e) => {
+			const data = JSON.parse(e.data);
+			list.push([data.key, data.value]);
+			wsChart.setOption({
+				title: {
+	                text: 'Testing RabbitMQ to WebSocket by Echarts',
+	            },
+	            xAxis: {
+	            	type: 'time',
+	            },
+	            yAxis: {},
+	            tooltip: {},
+				series: [{
+	            	name: 'random bar',
+	            	type: 'bar',
+	            	smooth:true,
+	            	data: list,
+            	},{
+	            	name: 'random line',
+	            	type: 'line',
+	            	smooth:true,
+	            	data: list,
+            	}]
+			});
+		}
+
+		websocketHeartbeatJs.onclose = () => {
+			console.log('websocketHeartbeatJs close');
+		}
+
+		websocketHeartbeatJs.onreconnect = (e) => {
+    		console.log('websocketHeartbeatJs reconnecting...');
+		}
+
+		websocketHeartbeatJs.onerror = () => {
+    		console.log('websocketHeartbeatJs error');
+		}
+	</script>
+</body>
+</html>
