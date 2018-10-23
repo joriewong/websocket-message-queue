@@ -52,4 +52,4 @@ open `index.html` and you will see RabbitMQ message chart.
 
 ## License
 
-[MIT](websocket-message-queue/LICENSE)
+[MIT](https://github.com/joriewong/websocket-message-queue/blob/master/LICENSE)
