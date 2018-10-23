@@ -14,7 +14,6 @@ $ npm install
 
 ``` javascript
 /* websocket-message-queue-server.js */
-
 const rabbitMQ = amqp.createConnection({ url: 'amqp://username:password@host:5672' });
 
 ```
@@ -53,4 +52,4 @@ open `index.html` and you will see RabbitMQ message chart.
 
 ## License
 
-MIT
+[MIT](websocket-message-queue/LICENSE)
